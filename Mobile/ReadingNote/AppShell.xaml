@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="ReadingNote.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:ReadingNote"
+    xmlns:pages="clr-namespace:ReadingNote.Pages"
+    Shell.FlyoutBehavior="Disabled">
+
+    <TabBar>
+        <Tab Title="首页" Icon="home.svg">
+            <ShellContent
+                ContentTemplate="{DataTemplate pages:HomePage}"
+                Route="home"/>
+        </Tab>
+
+        <Tab Title="书架" Icon="book.svg">
+            <ShellContent
+                ContentTemplate="{DataTemplate pages:BookshelfPage}"
+                Route="bookshelf"/>
+        </Tab>
+
+        <Tab Title="笔记" Icon="note.svg">
+            <ShellContent
+                ContentTemplate="{DataTemplate pages:NotesPage}"
+                Route="notes"/>
+        </Tab>
+
+        <Tab Title="设置" Icon="setting.svg">
+            <ShellContent
+                ContentTemplate="{DataTemplate pages:SettingPage}"
+                Route="bookshelf"/>
+        </Tab>
+    </TabBar>
+
+</Shell>
