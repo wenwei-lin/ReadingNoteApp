@@ -14,10 +14,15 @@
                 Route="home"/>
         </Tab>
 
-        <Tab Title="书架" Icon="book.svg">
+        <Tab Title="书本" Icon="book.svg">
             <ShellContent
                 ContentTemplate="{DataTemplate pages:BookshelfPage}"
-                Route="bookshelf"/>
+                Route="bookshelf"
+                Title="书架"/>
+            <ShellContent
+                ContentTemplate="{DataTemplate pages:BooklistsPage}"
+                Route="booklists"
+                Title="书单"/>
         </Tab>
 
         <Tab Title="笔记" Icon="note.svg">

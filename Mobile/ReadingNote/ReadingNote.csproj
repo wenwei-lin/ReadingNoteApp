@@ -52,9 +52,18 @@
 	  <None Remove="Resources\Images\book.svg" />
 	  <None Remove="Resources\Images\home.svg" />
 	  <None Remove="Resources\Images\note.svg" />
+	  <None Remove="Resources\Images\plus.svg" />
+	  <None Remove="Resources\Images\s10389470.jpg" />
 	  <None Remove="Resources\Images\s1670978.jpg" />
 	  <None Remove="Resources\Images\s28786043.jpg" />
+	  <None Remove="Resources\Images\s29767494.jpg" />
+	  <None Remove="Resources\Images\s32299170.jpg" />
 	  <None Remove="Resources\Images\s33503306.jpg" />
+	  <None Remove="Resources\Images\s33673418.jpg" />
+	  <None Remove="Resources\Images\s33974950.jpg" />
+	  <None Remove="Resources\Images\s34295465.jpg" />
+	  <None Remove="Resources\Images\s34300732.jpg" />
+	  <None Remove="Resources\Images\s4468482.jpg" />
 	  <None Remove="Resources\Images\setting.svg" />
 	</ItemGroup>
 
@@ -66,11 +75,13 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="ViewModels\" />
 	  <Folder Include="Views\" />
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="Pages\BooklistsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Pages\BookshelfPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
