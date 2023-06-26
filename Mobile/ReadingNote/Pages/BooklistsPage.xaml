@@ -2,10 +2,57 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ReadingNote.Pages.BooklistsPage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+    <ScrollView>
+        <VerticalStackLayout Padding="10" Spacing="16">
+            <Frame Padding="10">
+                <VerticalStackLayout Spacing="5">
+                    <FlexLayout JustifyContent="SpaceBetween">
+                        <Label Text="意识流小说" FontSize="16" FontAttributes="Bold" />
+                        <Label Text=">" FontSize="16" FontAttributes="Bold" VerticalOptions="Center" />
+                    </FlexLayout>
+                    <HorizontalStackLayout Spacing="5">
+                        <VerticalStackLayout Spacing="5">
+                            <Image Source="s10389470.jpg" HeightRequest="160" />
+                            <Label Text="尤利西斯" FontSize="16" HorizontalOptions="Center" />
+                        </VerticalStackLayout>
+                        <VerticalStackLayout Spacing="5">
+                            <Image Source="s32299170.jpg" HeightRequest="160" />
+                            <Label Text="洛丽塔" FontSize="16" HorizontalOptions="Center" />
+                        </VerticalStackLayout>
+                        <VerticalStackLayout Spacing="5">
+                            <Image Source="s34300732.jpg" HeightRequest="160" />
+                            <Label Text="达洛卫夫人" FontSize="16" HorizontalOptions="Center" />
+                        </VerticalStackLayout>
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+            </Frame>
+
+            <Frame Padding="10">
+                <VerticalStackLayout Spacing="5">
+                    <FlexLayout JustifyContent="SpaceBetween">
+                        <Label Text="如何阅读？" FontSize="16" FontAttributes="Bold" />
+                        <Label Text=">" FontSize="16" FontAttributes="Bold" VerticalOptions="Center" />
+                    </FlexLayout>
+                    <HorizontalStackLayout Spacing="5">
+                        <VerticalStackLayout Spacing="5">
+                            <Image Source="s1670978.jpg" HeightRequest="160" />
+                            <Label Text="如何阅读一本书" FontSize="16" HorizontalOptions="Center" />
+                        </VerticalStackLayout>
+                        <VerticalStackLayout Spacing="5">
+                            <Image Source="s33927783.jpg" HeightRequest="160" />
+                            <Label Text="卡片笔记写作法" FontSize="16" HorizontalOptions="Center" />
+                        </VerticalStackLayout>
+                        <VerticalStackLayout Spacing="5">
+                            <Image Source="s29767494.jpg" HeightRequest="160" />
+                            <Label Text="文学讲稿" FontSize="16" HorizontalOptions="Center" />
+                        </VerticalStackLayout>
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+            </Frame>
+
+            <Frame HeightRequest="80">
+                <Image Source="plus.svg" HeightRequest="30" HorizontalOptions="Center" VerticalOptions="Center" />
+            </Frame>
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

@@ -2,11 +2,83 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ReadingNote.Pages.NotesPage"
-             Title="NotesPage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+             Title="笔记">
+    <VerticalStackLayout Padding="10">
+        <!-- 筛选按钮 -->
+        <FlexLayout JustifyContent="SpaceBetween">
+            <Frame Padding="5, 5" CornerRadius="10">
+                <HorizontalStackLayout Spacing="2">
+                    <Image Source="filter.svg" HeightRequest="16" />
+                    <Label Text="筛选" FontSize="14" FontAttributes="Bold" />
+                </HorizontalStackLayout>
+            </Frame>
+
+            <Frame Padding="8, 5" CornerRadius="10">
+                <Label Text="最近添加" FontSize="14" FontAttributes="Bold" />
+            </Frame>
+        </FlexLayout>
+        
+        <!-- 笔记列表 -->
+        <ScrollView>
+            <VerticalStackLayout Margin="0, 16" Spacing="10">
+                <!-- Editor -->
+                <!-- TODO: Hide Keyboard when tapping other area -->
+                <Frame>
+                    <Editor Placeholder="添加新笔记" HeightRequest="80" Keyboard="Text" />
+                    
+                </Frame>
+
+                <VerticalStackLayout Spacing="10">
+                    
+                    <!-- Display all notes -->
+                    <Frame Padding="16, 16" CornerRadius="20">
+                        <VerticalStackLayout Spacing="5">
+                            <!-- 显示Tag -->
+                            <HorizontalStackLayout Spacing="8">
+                                <Frame CornerRadius="10" BackgroundColor="LightGray" Padding="5, 2">
+                                    <Label Text="#阅读" HorizontalOptions="Center" VerticalOptions="Center" />
+                                </Frame>
+                            </HorizontalStackLayout>
+
+                            <!-- 显示笔记 -->
+                            <Label Text="阅读时请思考这四个问题：1. 整体来说，这本书到底在谈些什么；2. 作者细部说了些什么，怎么说的？3. 这本书说得有道理吗？是全部有道理，还是部分有道理？4. 这本书跟你有什么关系？" 
+                               FontSize="17" />
+
+                            <!-- 显示书名等信息-->
+                            <FlexLayout JustifyContent="SpaceBetween">
+                                <Label Text="《如何阅读一本书》· 54页" FontSize="16" TextColor="Gray" />
+                                <Label Text="2023-06-22" FontSize="16" TextColor="Gray"  />
+                            </FlexLayout>
+                        </VerticalStackLayout>
+                    </Frame>
+
+                    <Frame Padding="16, 16" CornerRadius="20">
+                        <VerticalStackLayout Spacing="5">
+                            <!-- 显示Tag -->
+                            <HorizontalStackLayout Spacing="8">
+                                <Frame CornerRadius="10" BackgroundColor="LightGray" Padding="5, 2">
+                                    <Label Text="#读书笔记" HorizontalOptions="Center" VerticalOptions="Center" />
+                                </Frame>
+                                <Frame CornerRadius="10" BackgroundColor="LightGray" Padding="5, 2">
+                                    <Label Text="#阅读" HorizontalOptions="Center" VerticalOptions="Center" />
+                                </Frame>
+                            </HorizontalStackLayout>
+
+                            <!-- 显示笔记 -->
+                            <Label Text="卢曼有两种卡片盒：文献卡片盒和主卡片盒，他们的使用方法如下：1. 阅读书籍、文献，记录简短的笔记并放入文献卡片盒；2. 回顾文献卡片盒内的笔记，将与自己思考或写作相关的内容写在新的卡片上，放入主卡片盒。" 
+                               FontSize="17" />
+
+                            <!-- 显示书名等信息-->
+                            <FlexLayout JustifyContent="SpaceBetween">
+                                <Label Text="《卡片笔记写作法》· 54-55页" FontSize="16" TextColor="Gray" />
+                                <Label Text="2023-06-22" FontSize="16" TextColor="Gray"  />
+                            </FlexLayout>
+                        </VerticalStackLayout>
+                    </Frame>
+                </VerticalStackLayout>
+                
+                
+            </VerticalStackLayout>
+        </ScrollView>
     </VerticalStackLayout>
 </ContentPage>

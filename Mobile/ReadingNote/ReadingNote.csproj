@@ -50,6 +50,7 @@
 
 	<ItemGroup>
 	  <None Remove="Resources\Images\book.svg" />
+	  <None Remove="Resources\Images\filter.svg" />
 	  <None Remove="Resources\Images\home.svg" />
 	  <None Remove="Resources\Images\note.svg" />
 	  <None Remove="Resources\Images\plus.svg" />
@@ -60,11 +61,13 @@
 	  <None Remove="Resources\Images\s32299170.jpg" />
 	  <None Remove="Resources\Images\s33503306.jpg" />
 	  <None Remove="Resources\Images\s33673418.jpg" />
+	  <None Remove="Resources\Images\s33927783.jpg" />
 	  <None Remove="Resources\Images\s33974950.jpg" />
 	  <None Remove="Resources\Images\s34295465.jpg" />
 	  <None Remove="Resources\Images\s34300732.jpg" />
 	  <None Remove="Resources\Images\s4468482.jpg" />
 	  <None Remove="Resources\Images\setting.svg" />
+	  <None Remove="Resources\Images\user.svg" />
 	</ItemGroup>
 
 	<ItemGroup>

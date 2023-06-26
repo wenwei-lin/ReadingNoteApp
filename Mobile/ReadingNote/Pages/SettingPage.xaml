@@ -2,11 +2,13 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ReadingNote.Pages.SettingPage"
-             Title="SettingPage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+             Title="设置">
+    <VerticalStackLayout Padding="10, 40">
+        <Frame Padding="20, 10" CornerRadius="20">
+            <HorizontalStackLayout Spacing="20">
+                <Image Source="user.svg" HeightRequest="20" />
+                <Label Text="账号设置" FontSize="15" />
+            </HorizontalStackLayout>
+        </Frame>
     </VerticalStackLayout>
 </ContentPage>

@@ -111,7 +111,7 @@
 
                 <!-- TODO: Adjust width -->
                 <Frame Grid.Row="3" Grid.Column="0" HeightRequest="160">
-                    <Image Source="plus.svg" HeightRequest="30" />
+                    <Image Source="plus.svg" HeightRequest="30" HorizontalOptions="Center" VerticalOptions="Center" />
                 </Frame>
             </Grid>
             
