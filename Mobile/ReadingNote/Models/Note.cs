@@ -12,15 +12,13 @@ public class Note
     public DateTime CreateTime { get; set; }
     public DateTime LastEditTime { get; set;}
 
-    public Note (string id, string content, string pageLocation, ICollection<Tag> tags, string bookId, Book book, DateTime createTime, DateTime lastEditTime)
+    public Note(string id, string content , string pageLocation, ICollection<Tag> tags, Book book, DateTime lastEditTime)
     {
         Id = id;
         Content = content;
         PageLocation = pageLocation;
         Tags = tags;
-        BookId = bookId;
         Book = book;
-        CreateTime = createTime;
         LastEditTime = lastEditTime;
     }
 }

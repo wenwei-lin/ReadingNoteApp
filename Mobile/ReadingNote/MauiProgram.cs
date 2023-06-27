@@ -21,9 +21,15 @@ public static class MauiProgram
 				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
 			});
 
+		// Service dependencies
 		builder.Services.AddSingleton<IUserBookService, MockUserBookService>();
+		builder.Services.AddSingleton<INoteService, MockNoteService>();
+
+		// ViewModels dependencies
 		builder.Services.AddSingleton<BookshelfPage>();
 		builder.Services.AddSingleton<BookShelfPageViewModel>();
+		builder.Services.AddSingleton<HomePage>();
+		builder.Services.AddSingleton<HomePageViewModel>();
 
 #if DEBUG
 		builder.Logging.AddDebug();

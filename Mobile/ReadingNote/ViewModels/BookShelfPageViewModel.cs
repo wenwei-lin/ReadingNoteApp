@@ -20,7 +20,7 @@ public partial class BookShelfPageViewModel : ObservableObject
     }
 
     
-    public void LoadData()
+    void LoadData()
     {
         var userBooks = userBookService.GetUserBooks();
         UserBooks.Clear();

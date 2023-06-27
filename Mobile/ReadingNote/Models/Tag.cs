@@ -6,10 +6,9 @@ public class Tag
     public string Title { get; set; }
     public string UserId { get; set; }
 
-    public Tag(string id, string title, string userId)
+    public Tag(string id, string title)
     {
         Id = id;
         Title = title;
-        UserId = userId;
     }
 }
