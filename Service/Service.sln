@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33801.468
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReadingNoteAppService", "ReadingNoteAppService\ReadingNoteAppService.csproj", "{17EF65A6-0ACB-46A2-BE5B-A1992A517A97}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{17EF65A6-0ACB-46A2-BE5B-A1992A517A97}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{17EF65A6-0ACB-46A2-BE5B-A1992A517A97}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{17EF65A6-0ACB-46A2-BE5B-A1992A517A97}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{17EF65A6-0ACB-46A2-BE5B-A1992A517A97}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {888B31B3-0795-4A60-8052-284DCD97534C}
+	EndGlobalSection
+EndGlobal

@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:ReadingNote.ViewModels"
+             xmlns:models="clr-namespace:ReadingNote.Models"
              x:Class="ReadingNote.Pages.NotesPage"
+             x:DataType="viewmodels:NotesPageViewModel"
              Title="笔记">
+    <ScrollView>
     <VerticalStackLayout Padding="10">
         <!-- 筛选按钮 -->
         <FlexLayout JustifyContent="SpaceBetween">
@@ -19,66 +23,57 @@
         </FlexLayout>
         
         <!-- 笔记列表 -->
-        <ScrollView>
-            <VerticalStackLayout Margin="0, 16" Spacing="10">
-                <!-- Editor -->
-                <!-- TODO: Hide Keyboard when tapping other area -->
-                <Frame>
+
+        <VerticalStackLayout Margin="0, 16" Spacing="10">
+            <!-- Editor -->
+            <!-- TODO: Hide Keyboard when tapping other area -->
+            <Frame>
                     <Editor Placeholder="添加新笔记" HeightRequest="80" Keyboard="Text" />
-                    
                 </Frame>
 
-                <VerticalStackLayout Spacing="10">
-                    
-                    <!-- Display all notes -->
-                    <Frame Padding="16, 16" CornerRadius="20">
-                        <VerticalStackLayout Spacing="5">
-                            <!-- 显示Tag -->
-                            <HorizontalStackLayout Spacing="8">
-                                <Frame CornerRadius="10" BackgroundColor="LightGray" Padding="5, 2">
-                                    <Label Text="#阅读" HorizontalOptions="Center" VerticalOptions="Center" />
-                                </Frame>
-                            </HorizontalStackLayout>
+            <CollectionView ItemsSource="{Binding Notes}" Margin="0, 10, 0, 20">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="10" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:Note">
+                        <Frame Padding="16, 16" CornerRadius="20">
+                            <VerticalStackLayout Spacing="5">
 
-                            <!-- 显示笔记 -->
-                            <Label Text="阅读时请思考这四个问题：1. 整体来说，这本书到底在谈些什么；2. 作者细部说了些什么，怎么说的？3. 这本书说得有道理吗？是全部有道理，还是部分有道理？4. 这本书跟你有什么关系？" 
-                               FontSize="17" />
+                                <!-- 显示Tag -->
+                                <CollectionView ItemsSource="{Binding Tags}">
+                                    <CollectionView.ItemsLayout>
+                                        <LinearItemsLayout Orientation="Horizontal" ItemSpacing="10" />
+                                    </CollectionView.ItemsLayout>
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate x:DataType="models:Tag">
+                                            <Frame CornerRadius="10" BackgroundColor="LightGray" Padding="5, 2">
+                                                <Label Text="{Binding Title, StringFormat='#{0}'}" HorizontalOptions="Center" VerticalOptions="Center" />
+                                            </Frame>
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </CollectionView>
 
-                            <!-- 显示书名等信息-->
-                            <FlexLayout JustifyContent="SpaceBetween">
-                                <Label Text="《如何阅读一本书》· 54页" FontSize="16" TextColor="Gray" />
-                                <Label Text="2023-06-22" FontSize="16" TextColor="Gray"  />
-                            </FlexLayout>
-                        </VerticalStackLayout>
-                    </Frame>
+                                <!-- 显示笔记 -->
+                                <Label Text="{Binding Content}" FontSize="17" />
 
-                    <Frame Padding="16, 16" CornerRadius="20">
-                        <VerticalStackLayout Spacing="5">
-                            <!-- 显示Tag -->
-                            <HorizontalStackLayout Spacing="8">
-                                <Frame CornerRadius="10" BackgroundColor="LightGray" Padding="5, 2">
-                                    <Label Text="#读书笔记" HorizontalOptions="Center" VerticalOptions="Center" />
-                                </Frame>
-                                <Frame CornerRadius="10" BackgroundColor="LightGray" Padding="5, 2">
-                                    <Label Text="#阅读" HorizontalOptions="Center" VerticalOptions="Center" />
-                                </Frame>
-                            </HorizontalStackLayout>
+                                <!-- 显示书名等信息-->
+                                <FlexLayout JustifyContent="SpaceBetween">
+                                    <HorizontalStackLayout>
+                                        <Label Text="{Binding Book.Title, StringFormat='《{0}》'}" FontSize="16" TextColor="Gray" />
+                                        <Label Text="· " FontSize="16" TextColor="Gray" />
+                                        <Label Text="{Binding PageLocation}" FontSize="16" TextColor="Gray" />
+                                    </HorizontalStackLayout>
+                                    <Label Text="{Binding LastEditTime, StringFormat='{}{0:yyyy-MM-dd}'}" FontSize="16" TextColor="Gray"  />
+                                </FlexLayout>
+                            </VerticalStackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
 
-                            <!-- 显示笔记 -->
-                            <Label Text="卢曼有两种卡片盒：文献卡片盒和主卡片盒，他们的使用方法如下：1. 阅读书籍、文献，记录简短的笔记并放入文献卡片盒；2. 回顾文献卡片盒内的笔记，将与自己思考或写作相关的内容写在新的卡片上，放入主卡片盒。" 
-                               FontSize="17" />
 
-                            <!-- 显示书名等信息-->
-                            <FlexLayout JustifyContent="SpaceBetween">
-                                <Label Text="《卡片笔记写作法》· 54-55页" FontSize="16" TextColor="Gray" />
-                                <Label Text="2023-06-22" FontSize="16" TextColor="Gray"  />
-                            </FlexLayout>
-                        </VerticalStackLayout>
-                    </Frame>
-                </VerticalStackLayout>
-                
-                
-            </VerticalStackLayout>
-        </ScrollView>
+        </VerticalStackLayout>
     </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

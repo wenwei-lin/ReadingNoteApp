@@ -1,54 +1,44 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:ReadingNote.Models"
+             xmlns:viewmodels="clr-namespace:ReadingNote.ViewModels"
+             x:DataType="viewmodels:BooklistsPageViewModel"
              x:Class="ReadingNote.Pages.BooklistsPage">
     <ScrollView>
         <VerticalStackLayout Padding="10" Spacing="16">
-            <Frame Padding="10">
-                <VerticalStackLayout Spacing="5">
-                    <FlexLayout JustifyContent="SpaceBetween">
-                        <Label Text="意识流小说" FontSize="16" FontAttributes="Bold" />
-                        <Label Text=">" FontSize="16" FontAttributes="Bold" VerticalOptions="Center" />
-                    </FlexLayout>
-                    <HorizontalStackLayout Spacing="5">
-                        <VerticalStackLayout Spacing="5">
-                            <Image Source="s10389470.jpg" HeightRequest="160" />
-                            <Label Text="尤利西斯" FontSize="16" HorizontalOptions="Center" />
-                        </VerticalStackLayout>
-                        <VerticalStackLayout Spacing="5">
-                            <Image Source="s32299170.jpg" HeightRequest="160" />
-                            <Label Text="洛丽塔" FontSize="16" HorizontalOptions="Center" />
-                        </VerticalStackLayout>
-                        <VerticalStackLayout Spacing="5">
-                            <Image Source="s34300732.jpg" HeightRequest="160" />
-                            <Label Text="达洛卫夫人" FontSize="16" HorizontalOptions="Center" />
-                        </VerticalStackLayout>
-                    </HorizontalStackLayout>
-                </VerticalStackLayout>
-            </Frame>
-
-            <Frame Padding="10">
-                <VerticalStackLayout Spacing="5">
-                    <FlexLayout JustifyContent="SpaceBetween">
-                        <Label Text="如何阅读？" FontSize="16" FontAttributes="Bold" />
-                        <Label Text=">" FontSize="16" FontAttributes="Bold" VerticalOptions="Center" />
-                    </FlexLayout>
-                    <HorizontalStackLayout Spacing="5">
-                        <VerticalStackLayout Spacing="5">
-                            <Image Source="s1670978.jpg" HeightRequest="160" />
-                            <Label Text="如何阅读一本书" FontSize="16" HorizontalOptions="Center" />
-                        </VerticalStackLayout>
-                        <VerticalStackLayout Spacing="5">
-                            <Image Source="s33927783.jpg" HeightRequest="160" />
-                            <Label Text="卡片笔记写作法" FontSize="16" HorizontalOptions="Center" />
-                        </VerticalStackLayout>
-                        <VerticalStackLayout Spacing="5">
-                            <Image Source="s29767494.jpg" HeightRequest="160" />
-                            <Label Text="文学讲稿" FontSize="16" HorizontalOptions="Center" />
-                        </VerticalStackLayout>
-                    </HorizontalStackLayout>
-                </VerticalStackLayout>
-            </Frame>
+            <CollectionView ItemsSource="{Binding Booklists}">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="16" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:Booklist">
+                        <Frame Padding="10">
+                            <VerticalStackLayout Spacing="10">
+                                <FlexLayout JustifyContent="SpaceBetween">
+                                    <Label Text="{Binding Title}" FontSize="16" FontAttributes="Bold" />
+                                    <Label Text=">" FontSize="16" FontAttributes="Bold" VerticalOptions="Center" />
+                                </FlexLayout>
+                                <CollectionView ItemsSource="{Binding Books}">
+                                    <CollectionView.ItemsLayout>
+                                        <LinearItemsLayout Orientation="Horizontal" ItemSpacing="5" />
+                                    </CollectionView.ItemsLayout>
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate x:DataType="models:Book">
+                                            <VerticalStackLayout Spacing="5">
+                                                <Image Source="{Binding Cover}" HeightRequest="160" />
+                                                <Label Text="{Binding Title}" FontSize="16" HorizontalOptions="Center" />
+                                            </VerticalStackLayout>
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </CollectionView>
+                            </VerticalStackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            
+ 
 
             <Frame HeightRequest="80">
                 <Image Source="plus.svg" HeightRequest="30" HorizontalOptions="Center" VerticalOptions="Center" />
