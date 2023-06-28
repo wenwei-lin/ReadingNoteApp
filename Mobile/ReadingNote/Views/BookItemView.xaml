@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<VerticalStackLayout xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:ReadingNote.ViewModels"
+             x:Class="ReadingNote.Views.BookItemView"
+             x:DataType="viewmodels:BookViewModel"
+             Spacing="5">
+    <VerticalStackLayout.GestureRecognizers>
+        <TapGestureRecognizer Command="{Binding NavigateToDetailCommand}" />
+    </VerticalStackLayout.GestureRecognizers>
+    <AbsoluteLayout>
+        <Image
+            Source="{Binding Book.Cover}"
+            HeightRequest="160"
+         />
+        <Label Text="{Binding Book.Notes.Count, StringFormat='{0}条笔记'}" AbsoluteLayout.LayoutBounds="0, 139" BackgroundColor="Yellow" Opacity="0.8"  />
+    </AbsoluteLayout>
+    <!-- 使用LineBreakMode="TailTruncation"对超长部分截取 -->
+    <Label Text="{Binding Book.Title}" HorizontalOptions="Center" FontSize="16" LineBreakMode="TailTruncation" />
+</VerticalStackLayout>

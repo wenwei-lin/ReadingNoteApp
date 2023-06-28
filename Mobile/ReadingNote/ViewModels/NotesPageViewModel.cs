@@ -20,6 +20,7 @@ public partial class NotesPageViewModel : ObservableObject
 
     public async Task LoadDataAsync()
     {
+        Notes.Clear();
         var notes = await dataManager.GetAllNotesAsync();
         foreach (var note in notes)
         {

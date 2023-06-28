@@ -24,6 +24,9 @@ public partial class HomePageViewModel: ObservableObject
     
     public async Task LoadDataAsync()
     {
+        // TODO: Write api for recent books and notes
+        RecentBooks.Clear();
+        RecentNotes.Clear();
         var books = await dataManager.GetAllBooksAsync();
         var notes = await dataManager.GetAllNotesAsync();
         foreach (var book in books)
@@ -33,6 +36,11 @@ public partial class HomePageViewModel: ObservableObject
         foreach (var note in notes)
         {
             RecentNotes.Add(note);
+        }
+        if (RecentBooks.Count > 3)
+        {
+            // subset of book
+            RecentBooks = new ObservableCollection<Book>(RecentBooks.Take(3));
         }
     }
    

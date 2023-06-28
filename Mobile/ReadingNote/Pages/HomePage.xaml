@@ -35,13 +35,30 @@
                     <DataTemplate x:DataType="models:Note">
                         <Frame Padding="16, 16" CornerRadius="20">
                             <VerticalStackLayout Spacing="5">
+                                <!--显示Tag-->
+                                <CollectionView ItemsSource="{Binding Tags}">
+                                    <CollectionView.ItemsLayout>
+                                        <LinearItemsLayout Orientation="Horizontal" ItemSpacing="10" />
+                                    </CollectionView.ItemsLayout>
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate x:DataType="models:Tag">
+                                            <Frame CornerRadius="10" BackgroundColor="LightGray" Padding="5, 2">
+                                                <Label Text="{Binding Title, StringFormat='#{0}'}" HorizontalOptions="Center" VerticalOptions="Center" />
+                                            </Frame>
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </CollectionView>
 
-                                
 
                                 <!-- 显示笔记 -->
                                 <Label Text="{Binding Content}" FontSize="17" />
 
-                                
+                                <!-- 显示书名等信息-->
+                                <FlexLayout JustifyContent="SpaceBetween">
+                                    <HorizontalStackLayout>
+                                        <Label Text="{Binding Book.Title, StringFormat='《{0}》'}" FontSize="16" TextColor="Gray" />
+                                    </HorizontalStackLayout>
+                                </FlexLayout>
                             </VerticalStackLayout>
                         </Frame>
                     </DataTemplate>

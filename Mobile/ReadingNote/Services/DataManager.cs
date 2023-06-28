@@ -25,15 +25,42 @@ public class DataManager
         response.EnsureSuccessStatusCode();
         var content = await response.Content.ReadAsStringAsync();
         var books = JsonSerializer.Deserialize<ICollection<Book>>(content, serializerOptions);
+        // add notes
+        foreach (var book in books)
+        {
+            if (book.NoteIds != null)
+            {
+                ICollection<Note> notes = new List<Note>();
+                foreach (var noteId in book.NoteIds)
+                {
+                    var note = await GetNoteAsync(noteId);
+                    notes.Add(note);
+                }
+                book.Notes = notes;
+            }
+        }
         return books;
     }
 
-    public async Task<Book> GetBookAsync(int id)
+    public async Task<Book> GetBookAsync(int id, bool loadNote)
     {
         var response = await client.GetAsync(endpoint + "book/" + id);
         response.EnsureSuccessStatusCode();
         var content = await response.Content.ReadAsStringAsync();
         var book = JsonSerializer.Deserialize<Book>(content, serializerOptions);
+
+        // get notes
+        if (book.NoteIds != null && loadNote)
+        {
+            ICollection<Note> notes = new List<Note>();
+            foreach (var noteId in book.NoteIds)
+            {
+                var note = await GetNoteAsync(noteId);
+                notes.Add(note);
+            }
+            book.Notes = notes;
+        }
+
         return book;
     }
 
@@ -64,7 +91,7 @@ public class DataManager
         {
             if (note.BookId != null)
             {
-                note.Book = await GetBookAsync(note.BookId);
+                note.Book = await GetBookAsync(note.BookId, false);
             }
             if (note.TagIds != null)
             {
@@ -81,4 +108,30 @@ public class DataManager
         return notes;
     }
 
+    public async Task<Note> GetNoteAsync(int id)
+    {
+        var response = await client.GetAsync(endpoint + "note/" + id);
+        response.EnsureSuccessStatusCode();
+        var content = await response.Content.ReadAsStringAsync();
+        var note = JsonSerializer.Deserialize<Note>(content, serializerOptions);
+
+        if (note.BookId != null)
+        {
+            note.Book = await GetBookAsync(note.BookId, false);
+        }
+        if (note.TagIds != null)
+        {
+            ICollection<Tag> tags = new List<Tag>();
+            foreach (var tagId in note.TagIds)
+            {
+                var tag = await GetTagAsync(tagId);
+                tags.Add(tag);
+            }
+            note.Tags = tags;
+        }
+
+        return note;
+    }
 }
+
+

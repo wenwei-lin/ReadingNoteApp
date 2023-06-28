@@ -49,6 +49,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Remove="Views\BookItemView.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
 	  <None Remove="Resources\Images\book.svg" />
 	  <None Remove="Resources\Images\filter.svg" />
 	  <None Remove="Resources\Images\home.svg" />
@@ -79,10 +83,12 @@
 
 	<ItemGroup>
 	  <Folder Include="Converters\" />
-	  <Folder Include="Views\" />
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="Pages\BookDetailPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Pages\BooklistsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -96,6 +102,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\SettingPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\BookItemView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

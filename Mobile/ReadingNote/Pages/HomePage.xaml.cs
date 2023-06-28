@@ -4,9 +4,16 @@ namespace ReadingNote.Pages;
 
 public partial class HomePage : ContentPage
 {
-	public HomePage(HomePageViewModel vm)
+    private HomePageViewModel viewModel => BindingContext as HomePageViewModel;
+    public HomePage(HomePageViewModel vm)
 	{
 		InitializeComponent();
 		BindingContext = vm;
 	}
+
+	override protected async void OnAppearing()
+	{
+        base.OnAppearing();
+        await viewModel.LoadDataAsync();
+    }
 }
