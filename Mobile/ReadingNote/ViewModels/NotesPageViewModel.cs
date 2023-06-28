@@ -7,22 +7,21 @@ namespace ReadingNote.ViewModels;
 
 public partial class NotesPageViewModel : ObservableObject
 {
-    private readonly INoteService noteService;
+    private readonly DataManager dataManager;
 
     [ObservableProperty]
     ObservableCollection<Note> notes;
 
-    public NotesPageViewModel(INoteService noteService)
+    public NotesPageViewModel(DataManager dataManager)
     {
         notes = new ObservableCollection<Note>();
-        this.noteService = noteService;
-        LoadData();
+        this.dataManager = dataManager;
     }
 
-    void LoadData()
+    public async Task LoadDataAsync()
     {
-        var allNotes = noteService.GetNotes();
-        foreach (var note in allNotes)
+        var notes = await dataManager.GetAllNotesAsync();
+        foreach (var note in notes)
         {
             Notes.Add(note);
         }

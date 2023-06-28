@@ -197,7 +197,9 @@ app.MapGet("/note", async (ReadingNoteContext db) =>
         };
         noteOutputList.Add(noteOutput);
     }
-    return Results.Ok(noteOutputList);
+    
+    return Results.Json(noteOutputList);
+    
 }); 
 app.MapGet("/note/{id}", async (ReadingNoteContext db, int id) =>
 {

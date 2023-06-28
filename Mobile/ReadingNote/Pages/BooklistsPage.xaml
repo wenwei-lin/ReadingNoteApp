@@ -3,40 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:models="clr-namespace:ReadingNote.Models"
              xmlns:viewmodels="clr-namespace:ReadingNote.ViewModels"
-             x:DataType="viewmodels:BooklistsPageViewModel"
              x:Class="ReadingNote.Pages.BooklistsPage">
     <ScrollView>
         <VerticalStackLayout Padding="10" Spacing="16">
-            <CollectionView ItemsSource="{Binding Booklists}">
-                <CollectionView.ItemsLayout>
-                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="16" />
-                </CollectionView.ItemsLayout>
-                <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="models:Booklist">
-                        <Frame Padding="10">
-                            <VerticalStackLayout Spacing="10">
-                                <FlexLayout JustifyContent="SpaceBetween">
-                                    <Label Text="{Binding Title}" FontSize="16" FontAttributes="Bold" />
-                                    <Label Text=">" FontSize="16" FontAttributes="Bold" VerticalOptions="Center" />
-                                </FlexLayout>
-                                <CollectionView ItemsSource="{Binding Books}">
-                                    <CollectionView.ItemsLayout>
-                                        <LinearItemsLayout Orientation="Horizontal" ItemSpacing="5" />
-                                    </CollectionView.ItemsLayout>
-                                    <CollectionView.ItemTemplate>
-                                        <DataTemplate x:DataType="models:Book">
-                                            <VerticalStackLayout Spacing="5">
-                                                <Image Source="{Binding Cover}" HeightRequest="160" />
-                                                <Label Text="{Binding Title}" FontSize="16" HorizontalOptions="Center" />
-                                            </VerticalStackLayout>
-                                        </DataTemplate>
-                                    </CollectionView.ItemTemplate>
-                                </CollectionView>
-                            </VerticalStackLayout>
-                        </Frame>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
+            
             
  
 

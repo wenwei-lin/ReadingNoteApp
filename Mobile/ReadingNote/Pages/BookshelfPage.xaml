@@ -3,29 +3,24 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewmodel="clr-namespace:ReadingNote.ViewModels"
              xmlns:models="clr-namespace:ReadingNote.Models"
-             xmlns:converters="clr-namespace:ReadingNote.Converters"
              x:Class="ReadingNote.Pages.BookshelfPage"
              x:DataType="viewmodel:BookShelfPageViewModel"
              >
-    <ContentPage.Resources>
-        <converters:ReadingStatusConverter x:Key="ReadingStatusToString" />
-    </ContentPage.Resources>
+    
     <Grid Padding="16">
-        <CollectionView ItemsSource="{Binding UserBooks}">
+        <CollectionView ItemsSource="{Binding Books}">
             <CollectionView.ItemsLayout>
                 <GridItemsLayout Orientation="Vertical" Span="3" VerticalItemSpacing="16" />
             </CollectionView.ItemsLayout>
             <CollectionView.ItemTemplate>
-                <DataTemplate x:DataType="models:UserBook">
+                <DataTemplate x:DataType="models:Book">
                     <VerticalStackLayout Spacing="5">
                         <AbsoluteLayout>
-                            <Image Source="{Binding Book.Cover}" HeightRequest="160" />
-                            <!-- 使用Converter对Enum转换 -->
-                            <Label Text="{Binding Path=ReadingStatus, Converter={StaticResource ReadingStatusToString}}" BackgroundColor="Bisque" />
-                            <Label Text="{Binding TotalNotes, StringFormat='{0}条笔记'}" BackgroundColor="Yellow" AbsoluteLayout.LayoutBounds="0, 139"  />
+                            <Image Source="{Binding Cover}" HeightRequest="160" />
+                        
                         </AbsoluteLayout>
                         <!-- 使用LineBreakMode="TailTruncation"对超长部分截取 -->
-                        <Label Text="{Binding Book.Title}" HorizontalOptions="Center" FontSize="16" LineBreakMode="TailTruncation" />
+                        <Label Text="{Binding Title}" HorizontalOptions="Center" FontSize="16" LineBreakMode="TailTruncation" />
                     </VerticalStackLayout>
                 </DataTemplate>
             </CollectionView.ItemTemplate>

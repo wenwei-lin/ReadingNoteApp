@@ -7,26 +7,24 @@ namespace ReadingNote.ViewModels;
 
 public partial class BookShelfPageViewModel : ObservableObject
 {
-    private readonly IUserBookService userBookService;
+    private readonly DataManager dataManager;
 
     [ObservableProperty]
-    ObservableCollection<UserBook> userBooks;
+    ObservableCollection<Book> books;
 
-    public BookShelfPageViewModel(IUserBookService userBookService)
+    public BookShelfPageViewModel(DataManager dataManager)
     {
-        UserBooks = new ObservableCollection<UserBook>();
-        this.userBookService = userBookService;
-        LoadData();
+        books = new ObservableCollection<Book>();
+        this.dataManager = dataManager;
     }
 
-    
-    void LoadData()
+
+    public async Task LoadDataAsync()
     {
-        var userBooks = userBookService.GetUserBooks();
-        UserBooks.Clear();
-        foreach (var userBook in userBooks)
+        var books = await dataManager.GetAllBooksAsync();
+        foreach (var book in books)
         {
-            UserBooks.Add(userBook);
+            Books.Add(book);
         }
     }
 

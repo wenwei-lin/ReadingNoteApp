@@ -21,12 +21,7 @@ public static class MauiProgram
 				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
 				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
 			});
-
-        // HTTP client dependencies
-        HttpClient client = new HttpClient();
-        // 设置默认类型为JSON
-        client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-		builder.Services.AddSingleton<HttpClient>(client);
+       
 
 		// Service dependencies
 		builder.Services.AddSingleton<DataManager>();
