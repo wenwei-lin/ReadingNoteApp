@@ -4,6 +4,7 @@ using ReadingNote.Services;
 using Microsoft.Extensions.DependencyInjection;
 using ReadingNote.Pages;
 using ReadingNote.ViewModels;
+using System.Net.Http.Headers;
 
 namespace ReadingNote;
 
@@ -21,10 +22,14 @@ public static class MauiProgram
 				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
 			});
 
+        // HTTP client dependencies
+        HttpClient client = new HttpClient();
+        // 设置默认类型为JSON
+        client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+		builder.Services.AddSingleton<HttpClient>(client);
+
 		// Service dependencies
-		builder.Services.AddSingleton<IUserBookService, MockUserBookService>();
-		builder.Services.AddSingleton<INoteService, MockNoteService>();
-		builder.Services.AddSingleton<IBooklistService, MoceBooklistService>();
+		builder.Services.AddSingleton<DataManager>();
 
 		// ViewModels dependencies
 		builder.Services.AddSingleton<BookshelfPage>();

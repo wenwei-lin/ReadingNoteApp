@@ -7,7 +7,7 @@ namespace ReadingNote.ViewModels;
 
 public partial class BooklistsPageViewModel : ObservableObject
 {
-    private readonly IBooklistService booklistService;
+    private readonly DataManager dataManager;
 
     [ObservableProperty]
     ObservableCollection<Booklist> booklists;
