@@ -294,5 +294,4 @@ app.MapDelete("/note/{id}", async (ReadingNoteContext db, int id) =>
     return Results.NoContent();
 });
 
-
 app.Run();

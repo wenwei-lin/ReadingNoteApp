@@ -9,3 +9,4 @@ public class Book
     public ICollection<int> NoteIds { get; set; }
     public ICollection<Note> Notes { get; set; }
 }
++

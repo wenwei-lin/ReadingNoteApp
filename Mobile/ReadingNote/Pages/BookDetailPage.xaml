@@ -16,37 +16,7 @@
                 </VerticalStackLayout>
             </FlexLayout>
 
-            <Frame>
-                <VerticalStackLayout>
-                    <Editor x:Name="noteEditor" Placeholder="添加新笔记" Text="{Binding NewNote.Content}" FontSize="16" HeightRequest="80" Keyboard="Text" />
-                    
-                    <HorizontalStackLayout >
-                        <Label Text="标签: " FontSize="16" VerticalOptions="Center" />
-                        <Entry Placeholder="新建标签"  Text="{Binding NewTag.Title}" VerticalOptions="Center" ReturnCommand="{Binding AddTagCommand}" />
-                    </HorizontalStackLayout>
-
-
-                    <CollectionView ItemsSource="{Binding NewTags}">
-                        <CollectionView.ItemsLayout>
-                            <LinearItemsLayout Orientation="Horizontal" ItemSpacing="5" />
-                        </CollectionView.ItemsLayout>
-                        <CollectionView.ItemTemplate>
-                            <DataTemplate x:DataType="models:Tag">
-                                <Frame Padding="5, 4">
-                                    <HorizontalStackLayout Spacing="3">
-                                        <!-- TODO: Add Delete Button -->
-                                        <Label Text="{Binding Title, StringFormat='#{0}'}" />
-                                        <ImageButton Source="delete.svg" HeightRequest="15" WidthRequest="15" 
-                                                         Command="{Binding RemoveTagCommand, Source={RelativeSource AncestorType={x:Type viewmodels:NotesPageViewModel}}}"
-                                                         CommandParameter="{Binding}"/>
-                                    </HorizontalStackLayout>
-                                </Frame>
-                            </DataTemplate>
-                        </CollectionView.ItemTemplate>
-                    </CollectionView>
-                    <Button Margin="0, 20, 0, 10" Text="添加笔记" Command="{Binding AddNoteCommand}" />
-                </VerticalStackLayout>
-            </Frame>
+            
 
             <CollectionView ItemsSource="{Binding Book.Notes}" Margin="0, 10, 0, 20">
                 <CollectionView.ItemsLayout>
