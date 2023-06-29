@@ -80,6 +80,15 @@ public class DataManager
         return JsonSerializer.Deserialize<Tag>(content, serializerOptions);
     }
 
+    // 添加Tag
+    public async Task<Tag> AddTagAsync(Tag tag)
+    {
+        var response = await client.PostAsJsonAsync(endpoint + "tag", tag);
+        response.EnsureSuccessStatusCode();
+        var content = await response.Content.ReadAsStringAsync();
+        return JsonSerializer.Deserialize<Tag>(content, serializerOptions);
+    }
+
     public async Task<ICollection<Note>> GetAllNotesAsync()
     {
         var response = await client.GetAsync(endpoint + "note");
@@ -131,6 +140,42 @@ public class DataManager
         }
 
         return note;
+    }
+
+    public async Task<Note> AddNoteAsync(Note note)
+    {
+        int bookId = 0;
+        if (note.Book != null)
+        {
+            bookId = note.Book.Id;
+        }
+
+        ICollection<int> tagIds = new List<int>();
+        if (note.Tags != null)
+        {
+            foreach (var tag in note.Tags)
+            {
+                tagIds.Add(tag.Id.Value);
+            }
+        }
+
+        // Create request body as {"content", "bookId", "tagIds"}
+        var requestBody = new Dictionary<string, object>
+        {
+            { "content", note.Content },
+            { "bookId", bookId },
+            { "tagIds", tagIds }
+        };
+
+        var response = await client.PostAsJsonAsync(endpoint + "note", requestBody);
+        response.EnsureSuccessStatusCode();
+        var content = await response.Content.ReadAsStringAsync();
+        return JsonSerializer.Deserialize<Note>(content, serializerOptions);
+    }
+
+    public async Task DeleteNoteAsync(Note note)
+    {
+        await client.DeleteAsync(endpoint + "note/" + note.Id);
     }
 }
 

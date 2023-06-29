@@ -6,39 +6,74 @@
              x:Class="ReadingNote.Pages.NotesPage"
              x:DataType="viewmodels:NotesPageViewModel"
              Title="笔记">
+
     <ScrollView>
-    <VerticalStackLayout Padding="10">
-        <!-- 筛选按钮 -->
-        <FlexLayout JustifyContent="SpaceBetween">
-            <Frame Padding="5, 5" CornerRadius="10">
-                <HorizontalStackLayout Spacing="2">
-                    <Image Source="filter.svg" HeightRequest="16" />
-                    <Label Text="筛选" FontSize="14" FontAttributes="Bold" />
-                </HorizontalStackLayout>
-            </Frame>
-
-            <Frame Padding="8, 5" CornerRadius="10">
-                <Label Text="最近添加" FontSize="14" FontAttributes="Bold" />
-            </Frame>
-        </FlexLayout>
-        
-        <!-- 笔记列表 -->
-
-        <VerticalStackLayout Margin="0, 16" Spacing="10">
-            <!-- Editor -->
-            <!-- TODO: Hide Keyboard when tapping other area -->
-            <Frame>
-                    <Editor Placeholder="添加新笔记" HeightRequest="80" Keyboard="Text" />
+        <ScrollView.GestureRecognizers>
+            <TapGestureRecognizer x:Name="tapGestureRecognizer" />
+        </ScrollView.GestureRecognizers>
+        <VerticalStackLayout Padding="10">
+            <!-- 筛选按钮 -->
+            <FlexLayout JustifyContent="SpaceBetween">
+                <Frame Padding="5, 5" CornerRadius="10">
+                    <HorizontalStackLayout Spacing="2">
+                        <Image Source="filter.svg" HeightRequest="16" />
+                        <Label Text="筛选" FontSize="14" FontAttributes="Bold" />
+                    </HorizontalStackLayout>
                 </Frame>
 
-            <CollectionView ItemsSource="{Binding Notes}" Margin="0, 10, 0, 20">
-                <CollectionView.ItemsLayout>
-                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="10" />
-                </CollectionView.ItemsLayout>
-                <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="models:Note">
-                        <Frame Padding="16, 16" CornerRadius="20">
-                            <VerticalStackLayout Spacing="5">
+                <Frame Padding="8, 5" CornerRadius="10">
+                    <Label Text="最近添加" FontSize="14" FontAttributes="Bold" />
+                </Frame>
+            </FlexLayout>
+
+
+            <VerticalStackLayout Margin="0, 16" Spacing="10">
+                <!-- 添加笔记 -->
+                <Frame>
+                    <VerticalStackLayout>
+                        <Editor x:Name="noteEditor" Placeholder="添加新笔记" Text="{Binding NewNote.Content}" FontSize="16" HeightRequest="80" Keyboard="Text" />
+                        <HorizontalStackLayout>
+                            <Label Text="来源: " FontSize="16" VerticalOptions="Center" />
+                            <Picker VerticalOptions="Center" ItemsSource="{Binding Books}" SelectedItem="{Binding NewNote.Book}" ItemDisplayBinding="{Binding Title, StringFormat='《{0}》'}" />
+                        </HorizontalStackLayout>
+                        <HorizontalStackLayout >
+                            <Label Text="标签: " FontSize="16" VerticalOptions="Center" />
+                            <Entry Placeholder="新建标签"  Text="{Binding NewTag.Title}" VerticalOptions="Center" ReturnCommand="{Binding AddTagCommand}" />
+                        </HorizontalStackLayout>
+
+
+                        <CollectionView ItemsSource="{Binding NewTags}">
+                            <CollectionView.ItemsLayout>
+                                <LinearItemsLayout Orientation="Horizontal" ItemSpacing="5" />
+                            </CollectionView.ItemsLayout>
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate x:DataType="models:Tag">
+                                    <Frame Padding="5, 4">
+                                        <HorizontalStackLayout Spacing="3">
+                                            <!-- TODO: Add Delete Button -->
+                                            <Label Text="{Binding Title, StringFormat='#{0}'}" />
+                                            <ImageButton Source="delete.svg" HeightRequest="15" WidthRequest="15" 
+                                                         Command="{Binding RemoveTagCommand, Source={RelativeSource AncestorType={x:Type viewmodels:NotesPageViewModel}}}"
+                                                         CommandParameter="{Binding}"/>
+                                        </HorizontalStackLayout>
+                                    </Frame>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                        <Button Margin="0, 20, 0, 10" Text="添加笔记" Command="{Binding AddNoteCommand}" />
+                    </VerticalStackLayout>
+                </Frame>
+
+                <!-- 笔记列表 -->
+
+                <CollectionView ItemsSource="{Binding Notes}" Margin="0, 10, 0, 20">
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Vertical" ItemSpacing="10" />
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="models:Note">
+                            <Frame Padding="16, 16" CornerRadius="20">
+                                <VerticalStackLayout Spacing="5">
                                     <!--显示Tag-->
                                     <CollectionView ItemsSource="{Binding Tags}">
                                         <CollectionView.ItemsLayout>
@@ -54,22 +89,27 @@
                                     </CollectionView>
 
                                     <!-- 显示笔记 -->
-                                <Label Text="{Binding Content}" FontSize="17" />
+                                    <Label Text="{Binding Content}" FontSize="17" />
 
-                                <!-- 显示书名等信息-->
-                                <FlexLayout JustifyContent="SpaceBetween">
+                                    <!-- 显示书名等信息-->
+                                    <FlexLayout JustifyContent="SpaceBetween" AlignContent="Center">
                                         <HorizontalStackLayout>
                                             <Label Text="{Binding Book.Title, StringFormat='《{0}》'}" FontSize="16" TextColor="Gray" />
                                         </HorizontalStackLayout>
+                                        
+                                        <!-- Delete Button -->
+                                        <ImageButton Source="delete.svg" HeightRequest="16" WidthRequest="16" 
+                                                     Command="{Binding DeleteNoteCommand, Source={RelativeSource AncestorType={x:Type viewmodels:NotesPageViewModel}}}"
+                                                     CommandParameter="{Binding}"/>
                                     </FlexLayout>
-                            </VerticalStackLayout>
-                        </Frame>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
+                                </VerticalStackLayout>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
 
 
+            </VerticalStackLayout>
         </VerticalStackLayout>
-    </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

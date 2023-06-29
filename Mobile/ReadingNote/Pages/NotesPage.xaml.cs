@@ -16,4 +16,5 @@ public partial class NotesPage : ContentPage
         base.OnAppearing();
 		await viewModel.LoadDataAsync();
     }
+
 }

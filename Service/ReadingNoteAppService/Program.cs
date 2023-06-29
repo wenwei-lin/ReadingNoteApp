@@ -197,6 +197,8 @@ app.MapGet("/note", async (ReadingNoteContext db) =>
         };
         noteOutputList.Add(noteOutput);
     }
+    // 按照 id 降序
+    noteOutputList.Sort((a, b) => b.Id - a.Id);
     
     return Results.Json(noteOutputList);
     

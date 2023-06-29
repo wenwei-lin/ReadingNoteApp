@@ -1,12 +1,89 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:ReadingNote.ViewModels"
+             xmlns:models="clr-namespace:ReadingNote.Models"
              x:Class="ReadingNote.Pages.BookDetailPage"
-             Title="BookDetailPage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+             x:DataType="viewmodels:BookDetailPageViewModel"
+             Title="读书笔记">
+    <ScrollView>
+        <VerticalStackLayout Padding="10">
+            <FlexLayout JustifyContent="SpaceBetween" Margin="0,20,0,10">
+                <Image Source="{Binding Book.Cover}" WidthRequest="150" VerticalOptions="Start" />
+                <VerticalStackLayout Spacing="5" VerticalOptions="Start">
+                    <Label Text="{Binding Book.Title}" FontSize="20" FontAttributes="Bold" />
+                    <Label Text="{Binding Book.Description}" FontSize="16" MaximumWidthRequest="200" MaxLines="7" />
+                </VerticalStackLayout>
+            </FlexLayout>
+
+            <Frame>
+                <VerticalStackLayout>
+                    <Editor x:Name="noteEditor" Placeholder="添加新笔记" Text="{Binding NewNote.Content}" FontSize="16" HeightRequest="80" Keyboard="Text" />
+                    
+                    <HorizontalStackLayout >
+                        <Label Text="标签: " FontSize="16" VerticalOptions="Center" />
+                        <Entry Placeholder="新建标签"  Text="{Binding NewTag.Title}" VerticalOptions="Center" ReturnCommand="{Binding AddTagCommand}" />
+                    </HorizontalStackLayout>
+
+
+                    <CollectionView ItemsSource="{Binding NewTags}">
+                        <CollectionView.ItemsLayout>
+                            <LinearItemsLayout Orientation="Horizontal" ItemSpacing="5" />
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="models:Tag">
+                                <Frame Padding="5, 4">
+                                    <HorizontalStackLayout Spacing="3">
+                                        <!-- TODO: Add Delete Button -->
+                                        <Label Text="{Binding Title, StringFormat='#{0}'}" />
+                                        <ImageButton Source="delete.svg" HeightRequest="15" WidthRequest="15" 
+                                                         Command="{Binding RemoveTagCommand, Source={RelativeSource AncestorType={x:Type viewmodels:NotesPageViewModel}}}"
+                                                         CommandParameter="{Binding}"/>
+                                    </HorizontalStackLayout>
+                                </Frame>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                    <Button Margin="0, 20, 0, 10" Text="添加笔记" Command="{Binding AddNoteCommand}" />
+                </VerticalStackLayout>
+            </Frame>
+
+            <CollectionView ItemsSource="{Binding Book.Notes}" Margin="0, 10, 0, 20">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="10" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:Note">
+                        <Frame Padding="16, 16" CornerRadius="20">
+                            <VerticalStackLayout Spacing="5">
+                                <!--显示Tag-->
+                                <CollectionView ItemsSource="{Binding Tags}">
+                                    <CollectionView.ItemsLayout>
+                                        <LinearItemsLayout Orientation="Horizontal" ItemSpacing="10" />
+                                    </CollectionView.ItemsLayout>
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate x:DataType="models:Tag">
+                                            <Frame CornerRadius="10" BackgroundColor="LightGray" Padding="5, 2">
+                                                <Label Text="{Binding Title, StringFormat='#{0}'}" HorizontalOptions="Center" VerticalOptions="Center" />
+                                            </Frame>
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </CollectionView>
+
+                                <!-- 显示笔记 -->
+                                <Label Text="{Binding Content}" FontSize="17" />
+
+                                <!-- 显示书名等信息-->
+                                <FlexLayout JustifyContent="SpaceBetween">
+                                    <HorizontalStackLayout>
+                                        <Label Text="{Binding Book.Title, StringFormat='《{0}》'}" FontSize="16" TextColor="Gray" />
+                                    </HorizontalStackLayout>
+                                </FlexLayout>
+                            </VerticalStackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>
